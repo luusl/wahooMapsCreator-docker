@@ -10,6 +10,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -qq -y update \
         python3-geojson \
         python3-pip \
         python3-tk \
+        python3-matplotlib \
+        python3-bs4 \
         gdal-bin \
         python3-gdal \
         zip \
@@ -21,6 +23,10 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -qq -y update \
 RUN wget -q 'https://search.maven.org/remotecontent?filepath=org/mapsforge/mapsforge-map-writer/0.18.0/mapsforge-map-writer-0.18.0-jar-with-dependencies.jar' -O mapsforge-map-writer-0.18.0-jar-with-dependencies.jar \
     && mkdir -p ~/.openstreetmap/osmosis/plugins \
     && mv mapsforge*jar  ~/.openstreetmap/osmosis/plugins
+
+RUN wget -q 'http://katze.tfiu.de/projects/phyghtmap/phyghtmap_2.23-1_all.deb' -O phyghtmap.deb \
+    && dpkg -i phyghtmap.deb \
+    && rm phyghtmap.deb
 
 RUN bash -c "pip install requests shapely"
 RUN bash -c "pip install wahoomc"
